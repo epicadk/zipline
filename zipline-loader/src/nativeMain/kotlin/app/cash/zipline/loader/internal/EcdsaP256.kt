@@ -58,10 +58,14 @@ class EcdsaP256 : SignatureAlgorithm {
       valueCallBacks = kCFTypeDictionaryValueCallBacks.ptr,
     )
     CFDictionaryAddValue(
-      attributes, kSecAttrKeyType, kSecAttrKeyTypeECSECPrimeRandom,
+      attributes,
+      kSecAttrKeyType,
+      kSecAttrKeyTypeECSECPrimeRandom,
     )
     CFDictionaryAddValue(
-      attributes, kSecAttrKeyClass, kSecAttrKeyClassPublic,
+      attributes,
+      kSecAttrKeyClass,
+      kSecAttrKeyClassPublic,
     )
 
     memScoped {

@@ -19,7 +19,7 @@ package app.cash.zipline.loader
 import okio.ByteString
 import okio.IOException
 
-class FakeZiplineHttpClient: ZiplineHttpClient {
+class FakeZiplineHttpClient : ZiplineHttpClient {
   var filePathToByteString: Map<String, ByteString> = mapOf()
 
   override suspend fun download(url: String): ByteString {

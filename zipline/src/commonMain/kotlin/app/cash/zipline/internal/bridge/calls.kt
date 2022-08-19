@@ -156,7 +156,10 @@ internal class RealCallSerializer(
         serviceName = serviceName,
         inboundService = inboundService ?: unknownService(),
         function = function ?: unknownFunction<ZiplineService>(
-          serviceName, functionName, inboundService, suspendCallback
+          serviceName,
+          functionName,
+          inboundService,
+          suspendCallback
         ),
         suspendCallback = suspendCallback,
         args = args
@@ -247,7 +250,6 @@ internal class ArgsListSerializer(
     }
   }
 }
-
 
 internal class ResultSerializer<T>(
   internal val successSerializer: KSerializer<T>,

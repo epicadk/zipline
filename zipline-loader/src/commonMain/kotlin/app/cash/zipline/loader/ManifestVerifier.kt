@@ -50,11 +50,13 @@ class ManifestVerifier private constructor(
     for ((keyName, signature) in manifest.signatures) {
       val verifier = verifiers[keyName] ?: continue
 
-      check(verifier.algorithm.verify(
+      check(
+        verifier.algorithm.verify(
         message = signaturePayloadBytes,
         signature = signature.decodeHex(),
         publicKey = verifier.trustedKey,
-      )) {
+      )
+      ) {
         "manifest signature for key $keyName did not verify!"
       }
 

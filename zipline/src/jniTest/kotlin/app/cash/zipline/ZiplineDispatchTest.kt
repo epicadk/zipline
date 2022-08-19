@@ -66,28 +66,37 @@ class ZiplineDispatchTest {
 
     coroutineScope {
       async {
-        schedulerService.schedule(100L, object : SchedulerService.Callback {
+        schedulerService.schedule(
+          100L,
+          object : SchedulerService.Callback {
           override suspend fun invoke(): String {
             channel.send("delay = 100")
             return "success"
           }
-        })
+        }
+        )
       }
       async {
-        schedulerService.schedule(0L, object : SchedulerService.Callback {
+        schedulerService.schedule(
+          0L,
+          object : SchedulerService.Callback {
           override suspend fun invoke(): String {
             channel.send("delay = 0")
             return "success"
           }
-        })
+        }
+        )
       }
       async {
-        schedulerService.schedule(200L, object : SchedulerService.Callback {
+        schedulerService.schedule(
+          200L,
+          object : SchedulerService.Callback {
           override suspend fun invoke(): String {
             channel.send("delay = 200")
             return "success"
           }
-        })
+        }
+        )
       }
     }
 
@@ -105,38 +114,50 @@ class ZiplineDispatchTest {
 
     coroutineScope {
       async {
-        schedulerService.schedule(100L, object : SchedulerService.Callback {
+        schedulerService.schedule(
+          100L,
+          object : SchedulerService.Callback {
           override suspend fun invoke(): String {
             channel.send("delay = 100 before")
             this@coroutineScope.async {
-              schedulerService.schedule(200L, object : SchedulerService.Callback {
+              schedulerService.schedule(
+                200L,
+                object : SchedulerService.Callback {
                 override suspend fun invoke(): String {
                   channel.send("delay = 100 + 200")
                   return "success"
                 }
-              })
+              }
+              )
             }
             channel.send("delay = 100 after")
             return "success"
           }
-        })
+        }
+        )
       }
       async {
-        schedulerService.schedule(0L, object : SchedulerService.Callback {
+        schedulerService.schedule(
+          0L,
+          object : SchedulerService.Callback {
           override suspend fun invoke(): String {
             channel.send("delay = 0 before")
             this@coroutineScope.async {
-              schedulerService.schedule(200L, object : SchedulerService.Callback {
+              schedulerService.schedule(
+                200L,
+                object : SchedulerService.Callback {
                 override suspend fun invoke(): String {
                   channel.send("delay = 0 + 200")
                   return "success"
                 }
-              })
+              }
+              )
             }
             channel.send("delay = 0 after")
             return "success"
           }
-        })
+        }
+        )
       }
     }
 

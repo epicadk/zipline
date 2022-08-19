@@ -99,6 +99,7 @@ class ZiplineGradleDownloaderTest {
     assertTrue(fileSystem.exists(downloadDirPath / testFixtures.alphaSha256Hex))
     assertEquals(
       testFixtures.alphaByteString,
-      fileSystem.read(downloadDirPath / testFixtures.alphaSha256Hex) { readByteString() })
+      fileSystem.read(downloadDirPath / testFixtures.alphaSha256Hex) { readByteString() }
+    )
   }
 }

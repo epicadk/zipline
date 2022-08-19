@@ -97,4 +97,3 @@ class EcdsaP256JniTest {
     return keyFactory.generatePublic(keySpec) as ECPublicKey
   }
 }
-

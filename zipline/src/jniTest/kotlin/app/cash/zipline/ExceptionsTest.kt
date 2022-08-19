@@ -45,9 +45,11 @@ class ExceptionsTest {
 
     val service = zipline.take<EchoService>("throwingService")
 
-    assertThat(assertFailsWith<ZiplineException> {
+    assertThat(
+      assertFailsWith<ZiplineException> {
       service.echo(EchoRequest("Jake"))
-    }.stackTraceToString()).apply {
+    }.stackTraceToString()
+    ).apply {
       matches(
         """(?s).*IllegalStateException: boom!""" +
           """.*at goBoom1""" +
@@ -61,9 +63,11 @@ class ExceptionsTest {
   @Test fun jsCallJvmServiceThatThrows(): Unit = runBlocking {
     zipline.bind<EchoService>("throwingService", JvmThrowingEchoService())
 
-    assertThat(assertFailsWith<QuickJsException> {
+    assertThat(
+      assertFailsWith<QuickJsException> {
       zipline.quickJs.evaluate("testing.app.cash.zipline.testing.callThrowingService('homie')")
-    }.stackTraceToString()).apply {
+    }.stackTraceToString()
+    ).apply {
       matches(
         """(?s).*java\.lang\.IllegalStateException: boom!""" +
           """.*JvmThrowingEchoService\.goBoom1""" +
@@ -81,9 +85,11 @@ class ExceptionsTest {
 
     val service = zipline.take<EchoService>("delegatingService")
 
-    assertThat(assertFailsWith<ZiplineException> {
+    assertThat(
+      assertFailsWith<ZiplineException> {
       service.echo(EchoRequest("Jake"))
-    }.stackTraceToString()).apply {
+    }.stackTraceToString()
+    ).apply {
       matches(
         """(?s).*IllegalStateException: boom!""" +
           """.*at .*JvmThrowingEchoService\.goBoom1""" +

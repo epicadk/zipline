@@ -50,4 +50,3 @@ fun callInterfaceRequest(): String {
   val service = zipline.take<RequestInterfaceService>("requestInterfaceService")
   return service.echo(RealMessageInterface("Jesse"))
 }
-

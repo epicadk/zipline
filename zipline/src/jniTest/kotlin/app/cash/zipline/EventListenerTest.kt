@@ -127,9 +127,12 @@ class EventListenerTest {
   @Test fun jvmCallIncompatibleJsService() = runBlocking {
     zipline.quickJs.evaluate("testing.app.cash.zipline.testing.prepareJsBridges()")
 
-    assertThat(assertFailsWith<ZiplineApiMismatchException> {
+    assertThat(
+      assertFailsWith<ZiplineApiMismatchException> {
       zipline.take<PotatoService>("helloService").echo()
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       no such method (incompatible API versions?)
       	called function:
       		fun echo(): app.cash.zipline.testing.EchoResponse
@@ -150,9 +153,12 @@ class EventListenerTest {
   @Test fun jvmCallUnknownJsService() = runBlocking {
     zipline.quickJs.evaluate("testing.app.cash.zipline.testing.initZipline()")
 
-    assertThat(assertFailsWith<ZiplineApiMismatchException> {
+    assertThat(
+      assertFailsWith<ZiplineApiMismatchException> {
       zipline.take<EchoService>("helloService").echo(EchoRequest("hello"))
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
         no such service (service closed?)
         	called service:
         		helloService
@@ -176,9 +182,11 @@ class EventListenerTest {
     }
     zipline.bind<PotatoService>("supService", jvmPotatoService)
 
-    assertThat(assertFailsWith<QuickJsException> {
+    assertThat(
+      assertFailsWith<QuickJsException> {
       zipline.quickJs.evaluate("testing.app.cash.zipline.testing.callSupService('homie')")
-    }).hasMessageThat().startsWith("app.cash.zipline.ZiplineApiMismatchException: no such method")
+    }
+    ).hasMessageThat().startsWith("app.cash.zipline.ZiplineApiMismatchException: no such method")
 
     val name = "supService"
     val funName = "fun echo(app.cash.zipline.testing.EchoRequest): app.cash.zipline.testing.EchoResponse"
@@ -189,9 +197,11 @@ class EventListenerTest {
   }
 
   @Test fun jsCallUnknownJvmService() = runBlocking {
-    assertThat(assertFailsWith<QuickJsException> {
+    assertThat(
+      assertFailsWith<QuickJsException> {
       zipline.quickJs.evaluate("testing.app.cash.zipline.testing.callSupService('homie')")
-    }).hasMessageThat().startsWith("app.cash.zipline.ZiplineApiMismatchException: no such service")
+    }
+    ).hasMessageThat().startsWith("app.cash.zipline.ZiplineApiMismatchException: no such service")
 
     val name = "supService"
     val funName = "fun echo(app.cash.zipline.testing.EchoRequest): app.cash.zipline.testing.EchoResponse"

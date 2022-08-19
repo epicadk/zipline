@@ -32,7 +32,11 @@ internal fun newEndpointPair(
   listenerB: EventListener = EventListener.NONE,
 ): Pair<Endpoint, Endpoint> {
   val pair = object : Any() {
-    val a: Endpoint = Endpoint(scope, serializersModule, listenerA, object : CallChannel {
+    val a: Endpoint = Endpoint(
+      scope,
+      serializersModule,
+      listenerA,
+      object : CallChannel {
       override fun serviceNamesArray(): Array<String> {
         return b.inboundChannel.serviceNamesArray()
       }
@@ -44,7 +48,8 @@ internal fun newEndpointPair(
       override fun disconnect(instanceName: String): Boolean {
         return b.inboundChannel.disconnect(instanceName)
       }
-    })
+    }
+    )
 
     val b: Endpoint = Endpoint(scope, serializersModule, listenerB, a.inboundChannel)
   }

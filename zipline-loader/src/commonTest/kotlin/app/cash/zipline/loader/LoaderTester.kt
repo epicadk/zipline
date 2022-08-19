@@ -143,7 +143,8 @@ class LoaderTester(
     val seed = "fail"
     val manifestUrl = "$baseUrl/$applicationName/${getApplicationManifestFileName(applicationName)}"
     val ziplineFileByteString = testFixtures.createZiplineFile(
-      LoaderTestFixtures.createJs(seed), "$seed.js"
+      LoaderTestFixtures.createJs(seed),
+      "$seed.js"
     )
     httpClient.filePathToByteString = mapOf(
       "$baseUrl/$applicationName/$seed.zipline" to ziplineFileByteString
@@ -241,7 +242,8 @@ class LoaderTester(
     val ziplineFileByteString = testFixtures.createZiplineFile(
       LoaderTestFixtures.createFailureJs(
         seed
-      ), "$seed.js"
+      ),
+        "$seed.js"
     )
     val loadedManifest = LoaderTestFixtures.createRelativeManifest(
       seed,

@@ -31,4 +31,3 @@ internal interface Receiver {
     sha256: ByteString
   )
 }
-

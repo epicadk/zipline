@@ -50,15 +50,19 @@ class SerializersTest {
   }
 
   @Test fun missingGetReturnValueSerializerFailsFast() = runBlocking {
-    assertThat(assertFailsWith<IllegalArgumentException> {
+    assertThat(
+      assertFailsWith<IllegalArgumentException> {
       ziplineRequestOnly.take<AdaptersService>("adaptersService")
-    }).hasMessageThat().contains("Serializer for class 'AdaptersResponse' is not found.")
+    }
+    ).hasMessageThat().contains("Serializer for class 'AdaptersResponse' is not found.")
   }
 
   @Test fun missingGetParameterSerializerFailsFast() = runBlocking {
-    assertThat(assertFailsWith<IllegalArgumentException> {
+    assertThat(
+      assertFailsWith<IllegalArgumentException> {
       ziplineResponseOnly.take<AdaptersService>("adaptersService")
-    }).hasMessageThat().contains("Serializer for class 'AdaptersRequest' is not found.")
+    }
+    ).hasMessageThat().contains("Serializer for class 'AdaptersRequest' is not found.")
   }
 
   @Test fun presentGetSerializersSucceeds() = runBlocking {
@@ -70,21 +74,25 @@ class SerializersTest {
   }
 
   @Test fun missingSetReturnValueSerializerFailsFast() = runBlocking {
-    assertThat(assertFailsWith<IllegalArgumentException> {
+    assertThat(
+      assertFailsWith<IllegalArgumentException> {
       ziplineRequestOnly.bind<AdaptersService>(
         "adaptersService",
         JvmAdaptersService()
       )
-    }).hasMessageThat().contains("Serializer for class 'AdaptersResponse' is not found.")
+    }
+    ).hasMessageThat().contains("Serializer for class 'AdaptersResponse' is not found.")
   }
 
   @Test fun missingSetParameterSerializerFailsFast() = runBlocking {
-    assertThat(assertFailsWith<IllegalArgumentException> {
+    assertThat(
+      assertFailsWith<IllegalArgumentException> {
       ziplineResponseOnly.bind<AdaptersService>(
         "adaptersService",
         JvmAdaptersService()
       )
-    }).hasMessageThat().contains("Serializer for class 'AdaptersRequest' is not found.")
+    }
+    ).hasMessageThat().contains("Serializer for class 'AdaptersRequest' is not found.")
   }
 
   @Test fun presentSetSerializersSucceeds() = runBlocking {

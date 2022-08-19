@@ -33,7 +33,7 @@ import kotlinx.serialization.modules.SerializersModule
 internal fun <T : Any> SerializersModule.requireContextual(
   kClass: KClass<*>,
   typeArgumentsSerializers: List<KSerializer<*>>
-) : KSerializer<T> {
+): KSerializer<T> {
   val result = getContextual(kClass, typeArgumentsSerializers)
     ?: error("No contextual serializer for $kClass is registered")
   return result as KSerializer<T>

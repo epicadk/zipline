@@ -53,10 +53,12 @@ class DownloadOnlyFetcherReceiverTest {
     assertTrue(fileSystem.exists(downloadDir / testFixtures.alphaSha256Hex))
     assertEquals(
       testFixtures.alphaByteString,
-      fileSystem.read(downloadDir / testFixtures.alphaSha256Hex) { readByteString() })
+      fileSystem.read(downloadDir / testFixtures.alphaSha256Hex) { readByteString() }
+    )
     assertTrue(fileSystem.exists(downloadDir / testFixtures.bravoSha256Hex))
     assertEquals(
       testFixtures.bravoByteString,
-      fileSystem.read(downloadDir / testFixtures.bravoSha256Hex) { readByteString() })
+      fileSystem.read(downloadDir / testFixtures.bravoSha256Hex) { readByteString() }
+    )
   }
 }

@@ -378,15 +378,19 @@ internal class AdapterGenerator(
           typeArguments = adapterClass.typeParameters.map { it.defaultType },
         ).apply {
           type = ziplineFunctionT
-          putValueArgument(0, irCall(ziplineApis.listOfFunction).apply {
+          putValueArgument(
+            0,
+            irCall(ziplineApis.listOfFunction).apply {
             putTypeArgument(0, ziplineApis.kSerializer.starProjectedType)
-            putValueArgument(0,
+            putValueArgument(
+              0,
               irVararg(
                 ziplineApis.kSerializer.starProjectedType,
                 bridgedFunction.owner.valueParameters.map { irGet(serializers[it.type]!!) }
               )
             )
-          })
+          }
+          )
           val returnType = bridgedFunction.owner.returnType
           val resultSerializerType = when {
             bridgedFunction.isSuspend -> ziplineApis.suspendCallback.typeWith(returnType)
@@ -400,15 +404,18 @@ internal class AdapterGenerator(
       //   ZiplineFunction0(...),
       //   ZiplineFunction1(...),
       // )
-      +irReturn(irCall(ziplineApis.listOfFunction).apply {
+      +irReturn(
+        irCall(ziplineApis.listOfFunction).apply {
         putTypeArgument(0, ziplineFunctionT)
-        putValueArgument(0,
+        putValueArgument(
+          0,
           irVararg(
             ziplineFunctionT,
             expressions,
           )
         )
-      })
+      }
+      )
     }
 
     return ziplineFunctionsFunction

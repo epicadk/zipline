@@ -92,7 +92,8 @@ class ZiplinePlugin : KotlinCompilerPluginSupportPlugin {
         }
       }
 
-      createdTask.signingKeys.set(project.provider {
+      createdTask.signingKeys.set(
+        project.provider {
         configuration.signingKeys.asMap.values
       }.flatMap {
         it.map { dslKey ->
@@ -100,7 +101,8 @@ class ZiplinePlugin : KotlinCompilerPluginSupportPlugin {
             ManifestSigningKey(dslKey.name, algorithmId, privateKeyHex.decodeHex())
           }
         }.flatten()
-      })
+      }
+      )
     }
 
     val target = if (kotlinBinary.target.name == "js") "" else kotlinBinary.target.name

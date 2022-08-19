@@ -37,7 +37,11 @@ fun testZiplineLoader(
   nowEpochMs: () -> Long,
   eventListener: EventListener = EventListener.NONE,
 ) = ZiplineLoader(
-  dispatcher, manifestVerifier, httpClient, eventListener, nowEpochMs
+  dispatcher,
+  manifestVerifier,
+  httpClient,
+  eventListener,
+  nowEpochMs
 )
 
 fun testZiplineCache(

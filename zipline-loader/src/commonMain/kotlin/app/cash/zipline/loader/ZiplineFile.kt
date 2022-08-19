@@ -69,7 +69,9 @@ data class ZiplineFile(
     }
 
     private fun BufferedSource.readSection(
-      quickjsBytecode: ByteString? = null, sectionHeader: Int, sectionLength: Int
+      quickjsBytecode: ByteString? = null,
+      sectionHeader: Int,
+      sectionLength: Int
     ): ByteString? = when (sectionHeader) {
       SECTION_HEADER_QUICKJS_BYTECODE -> {
         if (quickjsBytecode != null) {

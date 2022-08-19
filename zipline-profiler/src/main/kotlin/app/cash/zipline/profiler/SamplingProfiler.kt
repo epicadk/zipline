@@ -56,8 +56,10 @@ internal class SamplingProfiler internal constructor(
 
   /** Placeholder value for the JavaScript thread. */
   private val javaScriptThreadId: Int = nextId++
+
   /** Placeholder value for JavaScript functions that don't have a proper signature. */
   private val javaScriptMethodSignatureStringId: Int
+
   /** Placeholder value for JavaScript functions that don't have a proper class. */
   private val javaScriptClassId: Int
 

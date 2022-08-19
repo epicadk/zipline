@@ -34,7 +34,7 @@ interface MessageInterface {
 @Serializable
 data class RealMessageInterface(
   override val message: String
-): MessageInterface
+) : MessageInterface
 
 val MessageInterfaceSerializersModule: SerializersModule = SerializersModule {
   polymorphic(

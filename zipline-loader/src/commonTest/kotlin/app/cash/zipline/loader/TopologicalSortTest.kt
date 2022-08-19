@@ -55,17 +55,28 @@ class TopologicalSortTest {
     assertTopologicalSort(
       unsorted = listOf("b", "c", "d", "a"),
       sorted = listOf("a", "b", "c", "d"),
-      "ba", "ca", "db", "dc"
+      "ba",
+      "ca",
+      "db",
+      "dc"
     )
     assertTopologicalSort(
       unsorted = listOf("d", "b", "c", "a"),
       sorted = listOf("a", "b", "c", "d"),
-      "ba", "ca", "db", "dc"
+      "ba",
+      "ca",
+      "db",
+      "dc"
     )
     assertTopologicalSort(
       unsorted = listOf("a", "b", "c", "d", "e"),
       sorted = listOf("d", "c", "a", "e", "b"),
-      "be", "bc", "ec", "ac", "cd", "ad"
+      "be",
+      "bc",
+      "ec",
+      "ac",
+      "cd",
+      "ad"
     )
   }
 

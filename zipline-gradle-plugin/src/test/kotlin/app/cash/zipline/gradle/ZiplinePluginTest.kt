@@ -144,7 +144,8 @@ class ZiplinePluginTest {
       |      ALGORITHM: Ed25519
       |     PUBLIC KEY: [\da-f]{64}
       |    PRIVATE KEY: [\da-f]{64}
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
   }
 
@@ -161,7 +162,8 @@ class ZiplinePluginTest {
       |      ALGORITHM: EcdsaP256
       |     PUBLIC KEY: [\da-f]{130}
       |    PRIVATE KEY: [\da-f]{134}
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
   }
 

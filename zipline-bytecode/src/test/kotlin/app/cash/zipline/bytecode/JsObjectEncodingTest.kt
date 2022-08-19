@@ -35,7 +35,8 @@ class JsObjectEncodingTest {
       |function greet(name) {
       |  return "hello, " + name;
       |}
-      """.trimMargin(), "hello.js"
+      """.trimMargin(),
+        "hello.js"
     )
 
     assertThat(evalFunction.name).isEqualTo("<eval>")

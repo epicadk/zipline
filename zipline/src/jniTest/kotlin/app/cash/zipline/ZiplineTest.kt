@@ -71,9 +71,11 @@ class ZiplineTest {
     val service = zipline.take<EchoService>("helloService")
 
     zipline.close()
-    assertThat(assertFailsWith<IllegalStateException> {
+    assertThat(
+      assertFailsWith<IllegalStateException> {
       service.echo(EchoRequest("Jake"))
-    }).hasMessageThat().isEqualTo("Zipline closed")
+    }
+    ).hasMessageThat().isEqualTo("Zipline closed")
   }
 
   @Test fun jvmCallJsService() = runBlocking(dispatcher) {
@@ -213,9 +215,12 @@ class ZiplineTest {
   @Test fun jvmCallIncompatibleJsService() = runBlocking(dispatcher) {
     zipline.quickJs.evaluate("testing.app.cash.zipline.testing.prepareJsBridges()")
 
-    assertThat(assertFailsWith<ZiplineApiMismatchException> {
+    assertThat(
+      assertFailsWith<ZiplineApiMismatchException> {
       zipline.take<PotatoService>("helloService").echo()
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       no such method (incompatible API versions?)
       	called function:
       		fun echo(): app.cash.zipline.testing.EchoResponse
@@ -230,9 +235,12 @@ class ZiplineTest {
   @Test fun suspendingJvmCallIncompatibleJsService() = runBlocking(dispatcher) {
     zipline.quickJs.evaluate("testing.app.cash.zipline.testing.prepareJsBridges()")
 
-    assertThat(assertFailsWith<ZiplineApiMismatchException> {
+    assertThat(
+      assertFailsWith<ZiplineApiMismatchException> {
       zipline.take<SuspendingPotatoService>("helloService").echo()
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       no such method (incompatible API versions?)
       	called function:
       		suspend fun echo(): app.cash.zipline.testing.EchoResponse
@@ -247,9 +255,12 @@ class ZiplineTest {
   @Test fun jsCallIncompatibleJvmService() = runBlocking(dispatcher) {
     zipline.bind<PotatoService>("supService", JvmPotatoService("sup"))
 
-    assertThat(assertFailsWith<QuickJsException> {
+    assertThat(
+      assertFailsWith<QuickJsException> {
       zipline.quickJs.evaluate("testing.app.cash.zipline.testing.callSupService('homie')")
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       app.cash.zipline.ZiplineApiMismatchException: no such method (incompatible API versions?)
       	called function:
       		fun echo(app.cash.zipline.testing.EchoRequest): app.cash.zipline.testing.EchoResponse
@@ -268,7 +279,8 @@ class ZiplineTest {
       .isNull()
 
     assertThat(zipline.quickJs.evaluate("testing.app.cash.zipline.testing.suspendingPotatoException") as String?)
-      .startsWith("""
+      .startsWith(
+        """
         ZiplineApiMismatchException: app.cash.zipline.ZiplineApiMismatchException: no such method (incompatible API versions?)
         	called function:
         		suspend fun echo(): app.cash.zipline.testing.EchoResponse
@@ -279,14 +291,16 @@ class ZiplineTest {
       )
   }
 
-
   @Test fun jvmCallUnknownJsService() = runBlocking(dispatcher) {
     zipline.quickJs.evaluate("testing.app.cash.zipline.testing.initZipline()")
 
     val noSuchService = zipline.take<EchoService>("noSuchService")
-    assertThat(assertFailsWith<ZiplineApiMismatchException> {
+    assertThat(
+      assertFailsWith<ZiplineApiMismatchException> {
       noSuchService.echo(EchoRequest("hello"))
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       no such service (service closed?)
       	called service:
       		noSuchService
@@ -300,9 +314,12 @@ class ZiplineTest {
     zipline.quickJs.evaluate("testing.app.cash.zipline.testing.initZipline()")
 
     val noSuchService = zipline.take<SuspendingEchoService>("noSuchService")
-    assertThat(assertFailsWith<ZiplineApiMismatchException> {
+    assertThat(
+      assertFailsWith<ZiplineApiMismatchException> {
       noSuchService.suspendingEcho(EchoRequest("hello"))
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       no such service (service closed?)
       	called service:
       		noSuchService
@@ -313,9 +330,12 @@ class ZiplineTest {
   }
 
   @Test fun jsCallUnknownJvmService() = runBlocking(dispatcher) {
-    assertThat(assertFailsWith<QuickJsException> {
+    assertThat(
+      assertFailsWith<QuickJsException> {
       zipline.quickJs.evaluate("testing.app.cash.zipline.testing.callSupService('homie')")
-    }).hasMessageThat().startsWith("""
+    }
+    ).hasMessageThat().startsWith(
+      """
       app.cash.zipline.ZiplineApiMismatchException: no such service (service closed?)
       	called service:
       		supService
@@ -333,7 +353,8 @@ class ZiplineTest {
       .isNull()
 
     assertThat(zipline.quickJs.evaluate("testing.app.cash.zipline.testing.suspendingPotatoException") as String?)
-      .startsWith("""
+      .startsWith(
+        """
         ZiplineApiMismatchException: app.cash.zipline.ZiplineApiMismatchException: no such service (service closed?)
         	called service:
         		jvmSuspendingPotatoService

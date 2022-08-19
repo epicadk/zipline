@@ -191,10 +191,10 @@ class LoggingEventListener : EventListener() {
       skipServiceEvents: Boolean,
       skipApplicationEvents: Boolean,
       skipInternalServices: Boolean,
-    ) : Boolean {
-      val skip = (skipServiceEvents && serviceName != null)
-        || (skipApplicationEvents && applicationName != null)
-        || (skipInternalServices && isInternalService)
+    ): Boolean {
+      val skip = (skipServiceEvents && serviceName != null) ||
+        (skipApplicationEvents && applicationName != null) ||
+        (skipInternalServices && isInternalService)
       return !skip
     }
   }

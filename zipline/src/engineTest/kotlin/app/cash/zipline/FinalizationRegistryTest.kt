@@ -167,7 +167,6 @@ class FinalizationRegistryTest {
     )
   }
 
-
   @Test
   fun multipleRegistriesMayBeUsed() {
     quickJs.evaluate(

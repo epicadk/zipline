@@ -28,7 +28,8 @@ import kotlinx.serialization.modules.SerializersModule
  * Adapts [ZiplineService] implementations to receive incoming and send outgoing calls. Most
  * implementations are generated.
  */
-@OptIn(ExperimentalSerializationApi::class) // Zipline must track ContextualSerializer API changes.
+@OptIn(ExperimentalSerializationApi::class)
+// Zipline must track ContextualSerializer API changes.
 @PublishedApi
 internal abstract class ZiplineServiceAdapter<T : ZiplineService> : KSerializer<T> {
   private val contextualSerializer = ContextualSerializer(PassByReference::class)
@@ -63,13 +64,13 @@ internal abstract class ZiplineServiceAdapter<T : ZiplineService> : KSerializer<
 }
 
 @PublishedApi
-internal fun <T : ZiplineService> ziplineServiceAdapter() : ZiplineServiceAdapter<T> {
+internal fun <T : ZiplineService> ziplineServiceAdapter(): ZiplineServiceAdapter<T> {
   error("unexpected call to ziplineServiceAdapter(): is the Zipline plugin configured?")
 }
 
 @PublishedApi
 internal fun <T : ZiplineService> ziplineServiceAdapter(
   ziplineServiceAdapter: ZiplineServiceAdapter<T>
-) : ZiplineServiceAdapter<T> {
+): ZiplineServiceAdapter<T> {
   return ziplineServiceAdapter
 }

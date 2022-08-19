@@ -117,21 +117,25 @@ class ApplySourceMapToBytecodeTest {
     val exception = assertFailsWith<Exception> {
       quickJs.evaluate("require('demo').sayHello()")
     }
-    assertThat(exception.stackTraceToString()).startsWith("""
+    assertThat(exception.stackTraceToString()).startsWith(
+      """
       |app.cash.zipline.QuickJsException: boom!
       |	at JavaScript.goBoom1(throwException.kt)
       |	at JavaScript.goBoom2(throwException.kt:9)
       |	at JavaScript.goBoom3(throwException.kt:6)
       |	at JavaScript.sayHello(throwException.kt:3)
       |	at JavaScript.<eval>(?)
-      |""".trimMargin())
+      |
+""".trimMargin()
+    )
   }
 
   @Test fun functionWithNoInstructions() {
     val js = """
       |function doNothing() {
       |}
-      |""".trimMargin()
+      |
+""".trimMargin()
 
     // Just confirm the empty function can be transformed successfully.
     val bytecode = quickJs.compile(js, "demo.js")
@@ -153,7 +157,8 @@ class ApplySourceMapToBytecodeTest {
       |        : b + c + d + Array(e-d.length+1).join(0);
       |    });
       |}
-      |""".trimMargin()
+      |
+""".trimMargin()
 
     val bytecode = quickJs.compile(js, "demo.js")
     val bytecodeWithSourceMap = applySourceMapToBytecode(bytecode, emptySourceMap)

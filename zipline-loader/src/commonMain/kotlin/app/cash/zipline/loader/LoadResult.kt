@@ -27,12 +27,12 @@ sealed class LoadResult {
   data class Success(
     val zipline: Zipline,
     val freshAtEpochMs: Long,
-  ): LoadResult()
+  ) : LoadResult()
 
   /**
    * [Exception] from the Zipline code load failure and corresponding metadata.
    */
   data class Failure(
     val exception: Exception,
-  ): LoadResult()
+  ) : LoadResult()
 }
